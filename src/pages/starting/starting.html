@@ -16,8 +16,8 @@
 <ion-content padding>
    <form (ngSubmit)="showDirections()" #f="ngForm">
     
-    <ion-searchbar placeholder="Trip starting point" autocorrect="off" autocapitalize="off" spellcheck="off" #searchOrigin name="startingPoint" ngModel required></ion-searchbar>
-    <ion-searchbar placeholder="Trip ending point" autocorrect="off" autocapitalize="off" spellcheck="off" #searchDestination name="endingPoint" ngModel required></ion-searchbar>
+    <ion-searchbar placeholder="Starting point" autocorrect="off" autocapitalize="off" spellcheck="off" #searchOrigin name="startingPoint" ngModel required></ion-searchbar>
+    <ion-searchbar placeholder="Destination" autocorrect="off" autocapitalize="off" spellcheck="off" #searchDestination name="endingPoint" ngModel required></ion-searchbar>
 
     <button ion-button block type="submit" [disabled]="!f.valid">Show directions</button>
   </form> 
@@ -31,8 +31,8 @@
       <agm-info-window><strong>{{formattedEndingAddress}}</strong></agm-info-window>
     </agm-marker>
 
-    <agm-marker [latitude]="lat" [longitude]="lng">
-      <agm-info-window><strong>Current position</strong></agm-info-window>
+    <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="customIconMarker">
+      <agm-info-window><strong>Your position</strong></agm-info-window>
     </agm-marker>
 
   </agm-map>

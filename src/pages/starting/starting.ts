@@ -17,7 +17,16 @@ import { PlacesService } from "../../services/places.service";
   templateUrl: 'starting.html',
 })
 export class StartingPage implements OnInit {
-  customMarkerIcon: any;
+  /**
+   * Custom marker section
+   */
+  customIconMarker = {
+    url: 'https://lh6.ggpht.com/2kNvSeSXkJGXR-A9RBEq3qAMM7rdq7EQTf96fAoOf7H3EP2w4ZVmnOIN0p47AnBgAgU=w300',
+    scaledSize:{
+      height: 40,
+      width: 40
+    }
+  };
   lat: number = 51.678418;
   lng: number = 7.809007;
   /**
@@ -90,6 +99,7 @@ export class StartingPage implements OnInit {
 
     this.geolocation.getCurrentPosition().then((resp) => {
       console.log('WORKS');
+      console.log(resp);
       this.lat = resp.coords.latitude;
       this.lng = resp.coords.longitude;
       console.log(resp.coords.longitude);
@@ -107,19 +117,6 @@ export class StartingPage implements OnInit {
   onAddplace(value: { startingPoint: string, endingPoint: string }) {
     this.placesService.addPlace(value);
     this.navCtrl.pop();
-  }
-
-  onLocateUser() {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      console.log('WORKS');
-      this.customMarkerIcon = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-      this.lat = resp.coords.latitude;
-      this.lng = resp.coords.longitude;
-      console.log(resp.coords.longitude);
-      console.log(resp.coords.latitude);
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
   }
 
   /**

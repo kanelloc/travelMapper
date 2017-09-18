@@ -32,9 +32,9 @@ export class DirectionsPage implements OnInit {
   originPlace = this.navParams.get('oringinObject');
 
   @ViewChild('map') mapElement: ElementRef;
+  
   map: any;
-  start = 'chicago, il';
-  end = 'chicago, il';
+  
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
   
