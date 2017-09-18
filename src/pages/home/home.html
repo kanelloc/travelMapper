@@ -1,15 +1,11 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Route Planner
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <button ion-button full (click)="onLoadNewTrip()">Go to starting page</button>
-
-  <ion-list>
-    <ion-item *ngFor="let place of places">Startin :{{ place.startingPoint}} Ending : {{place.endingPoint}}</ion-item>
-  </ion-list>
 </ion-content>

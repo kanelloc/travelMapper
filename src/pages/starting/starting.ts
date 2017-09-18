@@ -82,6 +82,7 @@ export class StartingPage implements OnInit {
         let autocomplete = new google.maps.places.Autocomplete(searchOrigin, { types: ['address'] });
         autocomplete.addListener("place_changed", () => {
           this.ngZone.run(() => {
+            console.log('FIRED');
             let place: google.maps.places.PlaceResult = autocomplete.getPlace();
             this.oringinObject = place;
             this.formattedStartingAddress = place.formatted_address;
@@ -134,10 +135,16 @@ export class StartingPage implements OnInit {
    * Passes to DirectionPage : origin and destination
    */
   showDirections(){
-    this.navCtrl.push(DirectionsPage,{
-      placeToPass: this.placeToPass,
-      oringinObject: this.oringinObject
-    });
+    if (!this.oringinObject || !this.placeToPass ) {
+      alert('+++++++++Errror+++++++++');
+
+    } else{
+        this.navCtrl.push(DirectionsPage,{
+        placeToPass: this.placeToPass,
+        oringinObject: this.oringinObject
+      });
+    }
+    
   }
 
 }
