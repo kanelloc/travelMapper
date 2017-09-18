@@ -5,7 +5,7 @@ import { DirectionsPage } from '../directions/directions';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { MapsAPILoader } from '@agm/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { } from '@types/googlemaps';
 
 
@@ -44,6 +44,11 @@ export class StartingPage implements OnInit {
   lngEnding: number;
   formattedEndingAddress: string;
 
+  /**
+   * Form sections
+   */
+  private plannerForm: FormGroup;
+
   @ViewChild('searchOrigin', {read: ElementRef}) searchOriginBar: ElementRef;
   @ViewChild('searchDestination', {read: ElementRef}) searchDestinationBar: ElementRef;
 
@@ -53,8 +58,13 @@ export class StartingPage implements OnInit {
     private placesService: PlacesService,
     private geolocation: Geolocation,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
-  ) { }
+    private ngZone: NgZone,
+    private formBuilder: FormBuilder) { 
+      this.plannerForm = this.formBuilder.group({
+        startingPoint: ['', Validators.required],
+        endingPoint: ['', Validators.required],
+      });
+    }
 
   ngOnInit() {
     /**

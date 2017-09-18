@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<!-- <ion-content padding>
    <form (ngSubmit)="showDirections()" #f="ngForm">
     
     <ion-searchbar placeholder="Starting point" autocorrect="off" autocapitalize="off" spellcheck="off" #searchOrigin name="startingPoint" ngModel required></ion-searchbar>
@@ -36,7 +36,34 @@
     </agm-marker>
 
   </agm-map>
+  
+</ion-content> -->
 
-  <!-- <button ion-button block (click)= "showDirections()">Show Directions</button> -->
+<!--Test section -->
+
+<ion-content padding>
+   <form (ngSubmit)="showDirections()" [formGroup]="plannerForm">
+    <ion-searchbar formControlName="startingPoint" placeholder="Starting point" autocorrect="off" autocapitalize="off" spellcheck="off" #searchOrigin name="startingPoint" ngModel required></ion-searchbar>
+    <ion-searchbar formControlName="endingPoint" placeholder="Destination" autocorrect="off" autocapitalize="off" spellcheck="off" #searchDestination name="endingPoint" ngModel required></ion-searchbar>
+
+    <button ion-button block type="submit" [disabled]="!plannerForm.valid">Show directions</button>
+  </form> 
+
+  <agm-map [latitude]="lat" [longitude]="lng">
+    <agm-marker [latitude]="latStarting" [longitude]="lngStarting">
+      <agm-info-window><strong>{{formattedStartingAddress}}</strong></agm-info-window>
+    </agm-marker>
+
+    <agm-marker [latitude]="latEnding" [longitude]="lngEnding">
+      <agm-info-window><strong>{{formattedEndingAddress}}</strong></agm-info-window>
+    </agm-marker>
+
+    <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="customIconMarker">
+      <agm-info-window><strong>Your position</strong></agm-info-window>
+    </agm-marker>
+
+  </agm-map>
   
 </ion-content>
+
+
