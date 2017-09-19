@@ -47,7 +47,7 @@ export class ProfilePage {
       .then((response) =>{
         //user logged out so we will remove him from the NativeStorage
         this.nativeStorage.remove('user');
-        this.appCtrl.getRootNav().push(LoginPage);
+        this.appCtrl.getRootNav().setRoot(LoginPage);
       }, (error) =>{
         console.log(error);
       });

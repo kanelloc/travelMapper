@@ -36,7 +36,7 @@ export class MyApp {
         env.nav.push(TabsPage, {index: "1"});
         splashScreen.hide();
       }, function (error) {
-        env.nav.push(LoginPage);
+        env.nav.setRoot(LoginPage);
         splashScreen.hide();
       });
 
