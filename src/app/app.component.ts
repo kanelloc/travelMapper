@@ -15,7 +15,7 @@ import { TabsPage } from '../pages/tabs/tabs';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  // rootPage:any = TabsPage;
   @ViewChild(Nav) nav: Nav;
 
   constructor(
@@ -32,7 +32,7 @@ export class MyApp {
       .then( function (data) {
         // user is previously logged and we have his data
         // we will let him access the app
-
+        env.nav.setRoot(TabsPage);
         env.nav.push(TabsPage, {index: "1"});
         splashScreen.hide();
       }, function (error) {
