@@ -1,0 +1,24 @@
+page-login {
+    @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+    
+    h1, p {
+        color: white;
+        font-family: 'Permanent Marker', cursive;
+    }
+
+    .icon{
+        margin-right: 10px;
+    }
+
+    .bottom-row{
+        margin-top: 225px;
+    }
+    
+
+    .scroll-content {
+        background-image: url("https://media.timeout.com/images/101594229/image.jpg");
+        background-repeat: no-repeat;
+        background-size: cover !important;
+        
+    }
+}

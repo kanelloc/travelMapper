@@ -9,10 +9,14 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { StartingPage } from '../pages/starting/starting';
 import { DirectionsPage } from '../pages/directions/directions';
+import { LoginPage } from '../pages/login/login'
+import { TabsPage } from '../pages/tabs/tabs';
+import { ProfilePage } from '../pages/profile/profile';
 
 // services
 import { PlacesService } from "../services/places.service";
-
+import { NativeStorage } from '@ionic-native/native-storage';
+import { Facebook } from '@ionic-native/facebook';
 //google maps
 import { AgmCoreModule } from '@agm/core';
 
@@ -21,7 +25,10 @@ import { AgmCoreModule } from '@agm/core';
     MyApp,
     HomePage,
     StartingPage,
-    DirectionsPage
+    DirectionsPage,
+    TabsPage,
+    LoginPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -36,12 +43,17 @@ import { AgmCoreModule } from '@agm/core';
     MyApp,
     HomePage,
     StartingPage,
-    DirectionsPage
+    DirectionsPage,
+    LoginPage,
+    ProfilePage,
+    TabsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     PlacesService,
+    NativeStorage,
+    Facebook,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
