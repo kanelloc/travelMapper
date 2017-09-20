@@ -1,9 +1,8 @@
-# Description:
-
-This is a trip plalling android application.
-
 # Description: 
-
+This is an android application project based on:
+* [Ionic Framework](https://ionicframework.com/)
+* [Google Maps API](https://developers.google.com/maps/)
+* [Facebook API](https://developers.facebook.com/)
 At first you must have a facebook account to log in.
 Application's main functionality is to find the distance and the travel time between 2 places of your choice.
 
