@@ -15,7 +15,7 @@ import { TabsPage } from '../pages/tabs/tabs';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  // rootPage:any = TabsPage;
+
   @ViewChild(Nav) nav: Nav;
 
   constructor(
@@ -26,16 +26,16 @@ export class MyApp {
 
     platform.ready().then(() => {
       let env = this;
-      // Here we will check if the user is already logged in
-      // because we don't want to ask users to log in each time they open the app
+      // Check if the user is loged In with native storage item user.
       this.nativeStorage.getItem('user')
       .then( function (data) {
-        // user is previously logged and we have his data
-        // we will let him access the app
+        // If the user is loged in redirect him to user profile page.
+        // Make root page Tabs general page.
         env.nav.setRoot(TabsPage);
         env.nav.push(TabsPage, {index: "1"});
         splashScreen.hide();
       }, function (error) {
+        // If he is not loged in bring in the Login Page.
         env.nav.setRoot(LoginPage);
         splashScreen.hide();
       });

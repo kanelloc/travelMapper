@@ -6,12 +6,6 @@ import { FormControl } from '@angular/forms';
 
 declare var google;
 
-/**
- * Generated class for the DirectionsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -23,10 +17,12 @@ export class DirectionsPage implements OnInit {
   totalDistance: any;
   totalTime: any;
 
-  constructor(private navController: NavController, private navParams: NavParams) {}
+  constructor(
+    private navController: NavController, 
+    private navParams: NavParams) {}
 
   /**
-   * Get parameters from starting.ts
+   * Get parameters from lasta ctivity starting.ts
    */
   endingPlace = this.navParams.get('placeToPass');
   originPlace = this.navParams.get('oringinObject');

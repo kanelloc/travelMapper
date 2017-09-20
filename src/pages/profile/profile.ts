@@ -13,8 +13,9 @@ import { LoginPage } from '../../pages/login/login';
 })
 export class ProfilePage {
 
+  // UserReady to ngIf in content.
   user: any;
-	userReady: boolean = false;
+  userReady: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -29,10 +30,11 @@ export class ProfilePage {
     let env = this;
     this.nativeStorage.getItem('user')
     .then(function (data){
+      // Store user information in user variable.
       env.user = {
-				name: data.name,
-				gender: data.gender,
-				picture: data.picture
+        name: data.name,
+        gender: data.gender,
+        picture: data.picture
       };
       env.userReady = true;
     }, function(error){
@@ -45,7 +47,8 @@ export class ProfilePage {
 		let env = this;
     this.fb.logout()
       .then((response) =>{
-        //user logged out so we will remove him from the NativeStorage
+        // User logged out so we will remove him from the NativeStorage.
+        // Redirrect user after logout to login page.
         this.nativeStorage.remove('user');
         this.appCtrl.getRootNav().setRoot(LoginPage);
       }, (error) =>{

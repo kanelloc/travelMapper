@@ -25,10 +25,11 @@ export class LoginPage {
   }
 
   fbLoginButton(){
+
     let permissions = new Array<string>();
     let nav = this.navCtrl;
     let env = this;
-    //the permissions your facebook app needs from the user
+    // The permissions your facebook app needs from the user.
     permissions = ['public_profile', 'user_friends', 'email'];
 
   
@@ -38,11 +39,11 @@ export class LoginPage {
       let userId = response.authResponse.userID;
       let params = new Array<string>();
 
-      //Getting name and gender properties
+      // Getting name and gender properties
       env.fb.api("/me?fields=name,gender", params)
       .then(function(user) {
         user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
-        //now we have the users info, let's save it in the NativeStorage
+        // Save use information in native storage.
         env.nativeStorage.setItem('user',
         {
           name: user.name,

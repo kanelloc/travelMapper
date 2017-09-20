@@ -17,9 +17,8 @@ import { PlacesService } from "../../services/places.service";
   templateUrl: 'starting.html',
 })
 export class StartingPage implements OnInit {
-  /**
-   * Custom marker section
-   */
+
+  // Initialize a custom marker
   customIconMarker = {
     url: 'https://lh6.ggpht.com/2kNvSeSXkJGXR-A9RBEq3qAMM7rdq7EQTf96fAoOf7H3EP2w4ZVmnOIN0p47AnBgAgU=w300',
     scaledSize:{
@@ -27,17 +26,20 @@ export class StartingPage implements OnInit {
       width: 40
     }
   };
+  // Initialize gps marker in map.
   lat: number = 51.678418;
   lng: number = 7.809007;
+
   /**
-   * Starting section
+   * Origin Section
    */
   oringinObject: any;
   latStarting: number;
   lngStarting: number;
   formattedStartingAddress: string;
+
   /**
-   * Ending section
+   * Destination Section
    */
   placeToPass: any;
   latEnding: number;
@@ -45,7 +47,7 @@ export class StartingPage implements OnInit {
   formattedEndingAddress: string;
 
   /**
-   * Form sections
+   * Form Section
    */
   private plannerForm: FormGroup;
 
@@ -68,21 +70,18 @@ export class StartingPage implements OnInit {
 
   ngOnInit() {
     /**
-     * seachinput variables
+     * Variables for the search boxes.
      */
     var searchOrigin = this.searchOriginBar.nativeElement.querySelector('.searchbar-input');
-    console.log("Search input", searchOrigin);
     var searchDestination = this.searchDestinationBar.nativeElement.querySelector('.searchbar-input');
-    console.log("Search input", searchOrigin);
 
     this.mapsAPILoader.load().then(
       () => {
 
-        // Autocomplete for starting point.
+        // Autocomplete for origin search box.
         let autocomplete = new google.maps.places.Autocomplete(searchOrigin, { types: ['address'] });
         autocomplete.addListener("place_changed", () => {
           this.ngZone.run(() => {
-            console.log('FIRED');
             let place: google.maps.places.PlaceResult = autocomplete.getPlace();
             this.oringinObject = place;
             this.formattedStartingAddress = place.formatted_address;
@@ -91,7 +90,7 @@ export class StartingPage implements OnInit {
           })
         })
 
-        // Autocomplete for Ending point.
+        // Autocomplete for destination search box.
         let autocompleteEnding = new google.maps.places.Autocomplete(searchDestination, { types: ['address'] });
         autocompleteEnding.addListener("place_changed", () => {
           this.ngZone.run(() => {
@@ -100,14 +99,12 @@ export class StartingPage implements OnInit {
             this.formattedEndingAddress = place.formatted_address;
             this.latEnding = place.geometry.location.lat();
             this.lngEnding = place.geometry.location.lng();
-            console.log(place);
-            console.log(this.placeToPass);
-            console.log(place.geometry.location)
           })
         })
       }
     )
 
+    // Get current user lcoation.
     this.geolocation.getCurrentPosition().then((resp) => {
       console.log('WORKS');
       console.log(resp);
@@ -123,11 +120,6 @@ export class StartingPage implements OnInit {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad StartingPage');
-  }
-
-  onAddplace(value: { startingPoint: string, endingPoint: string }) {
-    this.placesService.addPlace(value);
-    this.navCtrl.pop();
   }
 
   /**
