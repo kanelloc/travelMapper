@@ -39,7 +39,7 @@ export class LoginPage {
       let userId = response.authResponse.userID;
       let params = new Array<string>();
 
-      // Getting name and gender properties
+      // Makes a call to the facebook Graph api
       env.fb.api("/me?fields=name,gender", params)
       .then(function(user) {
         user.picture = "https://graph.facebook.com/" + userId + "/picture?type=large";
