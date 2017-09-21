@@ -23,29 +23,23 @@ export class StartingPage implements OnInit {
       width: 40
     }
   };
-  // Initialize gps marker in map.
+  // Initialize GPS marker in map.
   lat: number = 51.678418;
   lng: number = 7.809007;
 
-  /**
-   * Origin Section
-   */
+  // ORIGIN section.
   oringinObject: any;
   latStarting: number;
   lngStarting: number;
   formattedStartingAddress: string;
 
-  /**
-   * Destination Section
-   */
+  // DESTINATION section.
   placeToPass: any;
   latEnding: number;
   lngEnding: number;
   formattedEndingAddress: string;
 
-  /**
-   * Form Section
-   */
+  // Form section.
   private plannerForm: FormGroup;
 
   @ViewChild('searchOrigin', {read: ElementRef}) searchOriginBar: ElementRef;
@@ -65,9 +59,8 @@ export class StartingPage implements OnInit {
     }
 
   ngOnInit() {
-    /**
-     * Variables for the search boxes.
-     */
+    
+    // Searchboxes variables.
     var searchOrigin = this.searchOriginBar.nativeElement.querySelector('.searchbar-input');
     var searchDestination = this.searchDestinationBar.nativeElement.querySelector('.searchbar-input');
 
@@ -100,7 +93,7 @@ export class StartingPage implements OnInit {
       }
     )
 
-    // Get current user lcoation.
+    // Get current user location.
     this.geolocation.getCurrentPosition().then((resp) => {
       console.log('WORKS');
       console.log(resp);

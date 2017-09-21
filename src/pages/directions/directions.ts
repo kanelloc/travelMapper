@@ -3,12 +3,9 @@ import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { Diagnostic } from '@ionic-native/diagnostic';
-
 import { FormControl } from '@angular/forms';
 
-
 declare var google;
-
 
 @IonicPage()
 @Component({
@@ -16,15 +13,15 @@ declare var google;
   templateUrl: 'directions.html',
 })
 export class DirectionsPage implements OnInit {
-  // Metrics
+  // Distance and time metrics.
   totalDistance: any;
   totalTime: any;
 
-  // Current location lat, lng
+  // Current location lat, lng.
   currentLat: number;
   currentLng: number;
 
-  // Initialize a custom marker
+  // Initialize a custom styles marker.
   customIconMarker = {
     url: 'https://lh6.ggpht.com/2kNvSeSXkJGXR-A9RBEq3qAMM7rdq7EQTf96fAoOf7H3EP2w4ZVmnOIN0p47AnBgAgU=w300',
     scaledSize:{
@@ -32,7 +29,7 @@ export class DirectionsPage implements OnInit {
       width: 40
     }
   };
-
+  // initialize the marker's settings.
   myLatlng = new google.maps.LatLng(-25.363882,131.044922);
   currentLocationMarker = new google.maps.Marker({
         icon : this.customIconMarker,
@@ -47,9 +44,7 @@ export class DirectionsPage implements OnInit {
     private diagnostic: Diagnostic,
     private platform: Platform) {}
 
-  /**
-   * Get parameters from last activity starting.ts
-   */
+  // Get parameters from last activity starting.ts
   endingPlace = this.navParams.get('placeToPass');
   originPlace = this.navParams.get('oringinObject');
 
@@ -66,13 +61,9 @@ export class DirectionsPage implements OnInit {
   }
 
   ngOnInit() {
-    // console.log('DESTINATION')
-    // console.log(this.endingPlace.geometry.location);
     this.initMap();
 
-    /**
-     * Show the distance between the 2 points
-     */
+    // Show the directions for origin to destination.
     this.directionsService.route({
       origin: this.originPlace.geometry.location,
       destination: this.endingPlace.geometry.location,
@@ -82,10 +73,6 @@ export class DirectionsPage implements OnInit {
         this.directionsDisplay.setDirections(response);
         this.totalDistance = response.routes["0"].legs["0"].distance.text;
         this.totalTime = response.routes["0"].legs["0"].duration.text;
-        console.log('TEST33');
-        console.log(response.routes["0"].legs["0"]);
-        console.log(this.totalDistance);
-
       } else {
         window.alert('Directions request failed due to ' + status);
       }
@@ -105,7 +92,7 @@ export class DirectionsPage implements OnInit {
 
   checkAndDisplayLocation(){
     this.platform.ready().then((readySource) => {
-      // Check if gps service is on.
+      // Check if GPS service is on.
       this.diagnostic.isLocationEnabled().then(
         (isAvailable) => {
           if (isAvailable == false) {
@@ -117,8 +104,6 @@ export class DirectionsPage implements OnInit {
 
               // Get current user location.
               this.geolocation.getCurrentPosition().then((resp) => {
-                // console.log('WORKS');
-                // console.log(resp);
                 this.currentLat = resp.coords.latitude;
                 this.currentLng = resp.coords.longitude;
                 // Create new marker for current users location.
@@ -129,9 +114,7 @@ export class DirectionsPage implements OnInit {
                   title: "Current location"
                 });
                 // Include the marker to the map.
-                // marker.setMap(this.map);
                 this.currentLocationMarker.setPosition(newLatLng);
-
               }).catch((error) => {
                 console.log('Error getting location', error);
               });
@@ -147,18 +130,15 @@ export class DirectionsPage implements OnInit {
 
   enableLiveLocation(){
     this.platform.ready().then((readySource) => {
-      // Check if gps service is on.
+      // Check if GPS service is on.
       this.diagnostic.isLocationEnabled().then(
         (isAvailable) => {
           if (isAvailable == false) {
             alert('You must turn on GPS service');
             this.diagnostic.switchToLocationSettings();
           } else {
-              
               // Get current user location with live update.
               this.geolocation.watchPosition().subscribe((resp) => {
-                // console.log('WORKS');
-                // console.log(resp);
                 this.currentLat = resp.coords.latitude;
                 this.currentLng = resp.coords.longitude;
                 // Create new marker for current users location.
@@ -169,9 +149,7 @@ export class DirectionsPage implements OnInit {
                   title: "Current location"
                 });
                 // Include the marker to the map.
-                // marker.setMap(this.map);
                 this.currentLocationMarker.setPosition(newLatLng);
-
               }, (error) => {
                 console.log('Error getting location', error);
               });

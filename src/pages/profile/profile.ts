@@ -44,7 +44,7 @@ export class ProfilePage {
 
   fbLogoutButton(){
     var nav = this.navCtrl;
-		let env = this;
+    let env = this;
     this.fb.logout()
       .then((response) =>{
         // User logged out so we will remove him from the NativeStorage.
