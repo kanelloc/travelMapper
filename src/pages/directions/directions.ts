@@ -133,6 +133,7 @@ export class DirectionsPage implements OnInit {
         (isAvailable) => {
           if (isAvailable == false) {
             alert('You must turn on GPS service');
+            // Pop up the location settings.
             this.diagnostic.switchToLocationSettings();
           } else {
               alert('Is available? ' + isAvailable);
@@ -177,7 +178,7 @@ export class DirectionsPage implements OnInit {
             this.diagnostic.switchToLocationSettings();
           } else {
               
-              // Get current user location.
+              // Get current user location with live update.
               this.geolocation.watchPosition().subscribe((resp) => {
                 // console.log('WORKS');
                 // console.log(resp);

@@ -5,26 +5,25 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 
+// Pages section.
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { StartingPage } from '../pages/starting/starting';
 import { DirectionsPage } from '../pages/directions/directions';
 import { LoginPage } from '../pages/login/login'
 import { TabsPage } from '../pages/tabs/tabs';
 import { ProfilePage } from '../pages/profile/profile';
 
-// services
-import { PlacesService } from "../services/places.service";
+// Native services section.
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Facebook } from '@ionic-native/facebook';
 import { Diagnostic } from '@ionic-native/diagnostic';
-//google maps
+
+// Angular maps section.
 import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     StartingPage,
     DirectionsPage,
     TabsPage,
@@ -42,7 +41,6 @@ import { AgmCoreModule } from '@agm/core';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     StartingPage,
     DirectionsPage,
     LoginPage,
@@ -52,7 +50,6 @@ import { AgmCoreModule } from '@agm/core';
   providers: [
     StatusBar,
     SplashScreen,
-    PlacesService,
     NativeStorage,
     Facebook,
     Diagnostic,

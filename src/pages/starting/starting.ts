@@ -8,9 +8,6 @@ import { MapsAPILoader } from '@agm/core';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { } from '@types/googlemaps';
 
-
-import { PlacesService } from "../../services/places.service";
-
 @IonicPage()
 @Component({
   selector: 'page-starting',
@@ -57,7 +54,6 @@ export class StartingPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private placesService: PlacesService,
     private geolocation: Geolocation,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
