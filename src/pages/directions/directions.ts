@@ -163,6 +163,46 @@ export class DirectionsPage implements OnInit {
         });
     });
   }
+
+
+
+
+  enableLiveLocation(){
+    this.platform.ready().then((readySource) => {
+      // Check if gps service is on.
+      this.diagnostic.isLocationEnabled().then(
+        (isAvailable) => {
+          if (isAvailable == false) {
+            alert('You must turn on GPS service');
+            this.diagnostic.switchToLocationSettings();
+          } else {
+              
+              // Get current user location.
+              this.geolocation.watchPosition().subscribe((resp) => {
+                // console.log('WORKS');
+                // console.log(resp);
+                this.currentLat = resp.coords.latitude;
+                this.currentLng = resp.coords.longitude;
+                // Create new marker for current users location.
+                var newLatLng = new google.maps.LatLng(this.currentLat, this.currentLng);
+                var marker = new google.maps.Marker({
+                  icon : this.customIconMarker,
+                  position: newLatLng,
+                  title: "Current location"
+                });
+                // Include the marker to the map.
+                // marker.setMap(this.map);
+                this.currentLocationMarker.setPosition(newLatLng);
+
+              }, (error) => {
+                console.log('Error getting location', error);
+              });
+          }
+        }).catch ((e) => {
+          alert(JSON.stringify(e));
+        });
+    });
+  }
   
 
 }
