@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 
 import { Geolocation } from '@ionic-native/geolocation';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 import { FormControl } from '@angular/forms';
 
@@ -42,7 +43,9 @@ export class DirectionsPage implements OnInit {
   constructor(
     private navController: NavController, 
     private navParams: NavParams,
-    private geolocation: Geolocation) {}
+    private geolocation: Geolocation,
+    private diagnostic: Diagnostic,
+    private platform: Platform) {}
 
   /**
    * Get parameters from last activity starting.ts
@@ -120,6 +123,44 @@ export class DirectionsPage implements OnInit {
 
     }).catch((error) => {
       console.log('Error getting location', error);
+    });
+  }
+
+  checkAndDisplayLocation(){
+    this.platform.ready().then((readySource) => {
+      // Check if gps service is on.
+      this.diagnostic.isLocationEnabled().then(
+        (isAvailable) => {
+          if (isAvailable == false) {
+            alert('You must turn on GPS service');
+            this.diagnostic.switchToLocationSettings();
+          } else {
+              alert('Is available? ' + isAvailable);
+
+              // Get current user location.
+              this.geolocation.getCurrentPosition().then((resp) => {
+                // console.log('WORKS');
+                // console.log(resp);
+                this.currentLat = resp.coords.latitude;
+                this.currentLng = resp.coords.longitude;
+                // Create new marker for current users location.
+                var newLatLng = new google.maps.LatLng(this.currentLat, this.currentLng);
+                var marker = new google.maps.Marker({
+                  icon : this.customIconMarker,
+                  position: newLatLng,
+                  title: "Current location"
+                });
+                // Include the marker to the map.
+                // marker.setMap(this.map);
+                this.currentLocationMarker.setPosition(newLatLng);
+
+              }).catch((error) => {
+                console.log('Error getting location', error);
+              });
+          }
+        }).catch ((e) => {
+          alert(JSON.stringify(e));
+        });
     });
   }
   

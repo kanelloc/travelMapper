@@ -17,6 +17,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { PlacesService } from "../services/places.service";
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Facebook } from '@ionic-native/facebook';
+import { Diagnostic } from '@ionic-native/diagnostic';
 //google maps
 import { AgmCoreModule } from '@agm/core';
 
@@ -54,6 +55,7 @@ import { AgmCoreModule } from '@agm/core';
     PlacesService,
     NativeStorage,
     Facebook,
+    Diagnostic,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
