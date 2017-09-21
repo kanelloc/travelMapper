@@ -103,29 +103,6 @@ export class DirectionsPage implements OnInit {
     this.currentLocationMarker.setMap(this.map);
   }
 
-  displayLocation() {
-    // Get current user lcoation.
-    this.geolocation.getCurrentPosition().then((resp) => {
-      // console.log('WORKS');
-      // console.log(resp);
-      this.currentLat = resp.coords.latitude;
-      this.currentLng = resp.coords.longitude;
-      // Create new marker for current users location.
-      var newLatLng = new google.maps.LatLng(this.currentLat, this.currentLng);
-      var marker = new google.maps.Marker({
-        icon : this.customIconMarker,
-        position: newLatLng,
-        title: "Current location"
-      });
-      // Include the marker to the map.
-      // marker.setMap(this.map);
-      this.currentLocationMarker.setPosition(newLatLng);
-
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-  }
-
   checkAndDisplayLocation(){
     this.platform.ready().then((readySource) => {
       // Check if gps service is on.
