@@ -78,7 +78,7 @@ export class StartingPage implements OnInit {
     this.mapsAPILoader.load().then(
       () => {
 
-        // Autocomplete for origin search box.
+        // Autocomplete for origin search box with address type.
         let autocomplete = new google.maps.places.Autocomplete(searchOrigin, { types: ['address'] });
         autocomplete.addListener("place_changed", () => {
           this.ngZone.run(() => {
@@ -90,7 +90,7 @@ export class StartingPage implements OnInit {
           })
         })
 
-        // Autocomplete for destination search box.
+        // Autocomplete for destination search box with adress type.
         let autocompleteEnding = new google.maps.places.Autocomplete(searchDestination, { types: ['address'] });
         autocompleteEnding.addListener("place_changed", () => {
           this.ngZone.run(() => {
