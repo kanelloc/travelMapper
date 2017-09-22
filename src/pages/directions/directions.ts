@@ -100,8 +100,6 @@ export class DirectionsPage implements OnInit {
             // Pop up the location settings.
             this.diagnostic.switchToLocationSettings();
           } else {
-              alert('Is available? ' + isAvailable);
-
               // Get current user location.
               this.geolocation.getCurrentPosition().then((resp) => {
                 this.currentLat = resp.coords.latitude;
@@ -115,6 +113,7 @@ export class DirectionsPage implements OnInit {
                 });
                 // Include the marker to the map.
                 this.currentLocationMarker.setPosition(newLatLng);
+                this.map.setCenter(newLatLng);
               }).catch((error) => {
                 console.log('Error getting location', error);
               });
@@ -124,9 +123,6 @@ export class DirectionsPage implements OnInit {
         });
     });
   }
-
-
-
 
   enableLiveLocation(){
     this.platform.ready().then((readySource) => {
@@ -150,6 +146,7 @@ export class DirectionsPage implements OnInit {
                 });
                 // Include the marker to the map.
                 this.currentLocationMarker.setPosition(newLatLng);
+                this.map.setCenter(newLatLng);
               }, (error) => {
                 console.log('Error getting location', error);
               });

@@ -117,7 +117,7 @@ export class StartingPage implements OnInit {
    */
   showDirections(){
     if (!this.oringinObject || !this.placeToPass ) {
-      alert('+++++++++Errror+++++++++');
+      alert('+++++++++Error+++++++++');
 
     } else{
         this.navCtrl.push(DirectionsPage,{
