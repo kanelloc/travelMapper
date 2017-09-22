@@ -79,6 +79,7 @@ export class StartingPage implements OnInit {
             let place: google.maps.places.PlaceResult = autocomplete.getPlace();
             this.oringinObject = place;
             this.formattedStartingAddress = place.formatted_address;
+            // Set marker's and map's lat, lng.
             this.latStarting = place.geometry.location.lat();
             this.lat = place.geometry.location.lat();
             this.lngStarting = place.geometry.location.lng();
@@ -93,6 +94,7 @@ export class StartingPage implements OnInit {
             let place: google.maps.places.PlaceResult = autocompleteEnding.getPlace();
             this.placeToPass = place;
             this.formattedEndingAddress = place.formatted_address;
+            // Set marker's and map's lat, lng.
             this.latEnding = place.geometry.location.lat();
             this.lat = place.geometry.location.lat();
             this.lngEnding = place.geometry.location.lng();
@@ -106,8 +108,6 @@ export class StartingPage implements OnInit {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.currentLat = resp.coords.latitude;
       this.currentLng = resp.coords.longitude;
-      console.log(resp.coords.longitude);
-      console.log(resp.coords.latitude);
     }).catch((error) => {
       console.log('Error getting location', error);
     });

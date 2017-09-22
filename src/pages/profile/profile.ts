@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { IonicPage, NavParams, App } from 'ionic-angular';
 
 import { Facebook } from '@ionic-native/facebook';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -17,8 +17,7 @@ export class ProfilePage {
   user: any;
   userReady: boolean = false;
 
-  constructor(
-    public navCtrl: NavController, 
+  constructor( 
     public navParams: NavParams,
     public fb: Facebook,
     public nativeStorage: NativeStorage,
@@ -43,12 +42,10 @@ export class ProfilePage {
   }
 
   fbLogoutButton(){
-    var nav = this.navCtrl;
-    let env = this;
     this.fb.logout()
       .then((response) =>{
-        // User logged out so we will remove him from the NativeStorage.
-        // Redirrect user after logout to login page.
+        // User logged out so remove him from the NativeStorage.
+        // Redirect user after logout to login page.
         this.nativeStorage.remove('user');
         this.appCtrl.getRootNav().setRoot(LoginPage);
       }, (error) =>{

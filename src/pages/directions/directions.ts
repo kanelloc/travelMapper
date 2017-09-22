@@ -90,40 +90,6 @@ export class DirectionsPage implements OnInit {
     this.currentLocationMarker.setMap(this.map);
   }
 
-  checkAndDisplayLocation(){
-    this.platform.ready().then((readySource) => {
-      // Check if GPS service is on.
-      this.diagnostic.isLocationEnabled().then(
-        (isAvailable) => {
-          if (isAvailable == false) {
-            alert('You must turn on GPS service');
-            // Pop up the location settings.
-            this.diagnostic.switchToLocationSettings();
-          } else {
-              // Get current user location.
-              this.geolocation.getCurrentPosition().then((resp) => {
-                this.currentLat = resp.coords.latitude;
-                this.currentLng = resp.coords.longitude;
-                // Create new marker for current users location.
-                var newLatLng = new google.maps.LatLng(this.currentLat, this.currentLng);
-                var marker = new google.maps.Marker({
-                  icon : this.customIconMarker,
-                  position: newLatLng,
-                  title: "Current location"
-                });
-                // Include the marker to the map.
-                this.currentLocationMarker.setPosition(newLatLng);
-                this.map.setCenter(newLatLng);
-              }).catch((error) => {
-                console.log('Error getting location', error);
-              });
-          }
-        }).catch ((e) => {
-          alert(JSON.stringify(e));
-        });
-    });
-  }
-
   enableLiveLocation(){
     this.platform.ready().then((readySource) => {
       // Check if GPS service is on.
