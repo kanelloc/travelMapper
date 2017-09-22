@@ -54,8 +54,7 @@ To check that everything is ready type `android` command in your terminal. If it
 ## Build & Publish: 
 
 * To generate a release build for Android, you can use the following cordova cli command in your project root file:
-
- `$ ionic cordova build --release android`
+* `$ ionic cordova build --release android`
 
 * You can find the *APK* file in `platforms/android/build/outputs/apk`.
 
