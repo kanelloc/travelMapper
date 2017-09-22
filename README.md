@@ -35,12 +35,12 @@ $ ionic cordova emulate android
 
 ### Testing as a native app:
 
+* Make sure that you have [Android studio](https://developer.android.com/studio/index.html) correctly installed on your pc.
+
 ```
 cd /path/to/the/project/folder
 $ ionic cordova run android --device
 ```
-
-* Make sure that you have [Android studio](https://developer.android.com/studio/index.html) correctly installed on your pc.
 
 If you see an error for the ANDROID_HOME variable and the `android` command make sure that you type the following in your terminal:
 
