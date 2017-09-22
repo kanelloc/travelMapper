@@ -11,6 +11,8 @@ Application's main functionality is to find the distance and the travel time bet
 ## Getting Started:
 
 ```
+npm install -g ionic cordova
+
 cd /path/where/you/want/the/repository
 
 # clone the repository
