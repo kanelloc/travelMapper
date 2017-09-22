@@ -10,13 +10,33 @@ Application's main functionality is to find the distance and the travel time bet
 
 ## Getting Started:
 
-First `git clone` the project in your local machine,  `cd ` into the main directory and then `npm install ` to install any external dependencies.
+```
+cd /path/where/you/want/the/repository
+
+# clone the repository
+git clone https://github.com/kanelloc/travelMapper.git
+cd travelMapper
+
+# Install depedencies
+npm install
+```
 
 ## Running:
 
 The application make use of [ionic native](https://ionicframework.com/docs/native/) wrapper. The best way to run the application is with your android device or with an emulator.
 
-### Android device debugging:
+### Simulator testing:
+
+```
+$ ionic cordova build android
+$ ionic cordova emulate android
+```
+
+### Testing as a native app:
+
+```
+$ ionic cordova run android --device
+```
 
 * Make sure that you have [Android studio](https://developer.android.com/studio/index.html) correctly installed on your pc.
 * Go to the root file of the project and type `ionic cordova run android --device`.
