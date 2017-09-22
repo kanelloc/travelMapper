@@ -23,9 +23,14 @@ export class StartingPage implements OnInit {
       width: 40
     }
   };
-  // Initialize GPS marker in map.
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+
+  // Initialize map center.
+  lat: number = 37.983810;
+  lng: number = 23.727539;
+
+  // Current location.
+  currentLat: number;
+  currentLng: number;
 
   // ORIGIN section.
   oringinObject: any;
@@ -75,7 +80,9 @@ export class StartingPage implements OnInit {
             this.oringinObject = place;
             this.formattedStartingAddress = place.formatted_address;
             this.latStarting = place.geometry.location.lat();
+            this.lat = place.geometry.location.lat();
             this.lngStarting = place.geometry.location.lng();
+            this.lng = place.geometry.location.lng();
           })
         })
 
@@ -87,7 +94,9 @@ export class StartingPage implements OnInit {
             this.placeToPass = place;
             this.formattedEndingAddress = place.formatted_address;
             this.latEnding = place.geometry.location.lat();
+            this.lat = place.geometry.location.lat();
             this.lngEnding = place.geometry.location.lng();
+            this.lng = place.geometry.location.lng();
           })
         })
       }
@@ -95,10 +104,8 @@ export class StartingPage implements OnInit {
 
     // Get current user location.
     this.geolocation.getCurrentPosition().then((resp) => {
-      console.log('WORKS');
-      console.log(resp);
-      this.lat = resp.coords.latitude;
-      this.lng = resp.coords.longitude;
+      this.currentLat = resp.coords.latitude;
+      this.currentLng = resp.coords.longitude;
       console.log(resp.coords.longitude);
       console.log(resp.coords.latitude);
     }).catch((error) => {
